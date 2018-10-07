@@ -1,3 +1,5 @@
+import * as actionTypes from './actions';
+
 const initialState = {
     counter: 0,
     results: []
@@ -5,27 +7,27 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-        case 'INCREMENT':
+        case actionTypes.INCREMENT:
             //Create a clono, not a DEEP clone
             const newState = Object.assign({}, state)
             newState.counter = state.counter + 1;
             return newState;
-        case 'DECREMENT':
+        case actionTypes.DECREMENT:
             return {
                 ...state,
                 counter: state.counter - 1
             }
-        case 'ADD':
+        case actionTypes.ADD:
             return {
                 ...state,
                 counter: state.counter + action.payload
             }
-        case 'SUBTRACT':
+        case actionTypes.SUBTRACT:
             return {
                 ...state,
                 counter: state.counter - action.payload
             }
-        case 'STORE_RESULT':
+        case actionTypes.STORE_RESULT:
             return {
                 ...state,
                 //CONCAT returns a NEW array. PUSH touches the original array, witch is not allowed here
@@ -34,7 +36,7 @@ const reducer = (state = initialState, action) => {
                     value: state.counter
                 })
             }
-        case 'DELETE_RESULT':
+        case actionTypes.DELETE_RESULT:
             /* WAY OF UPDATE THE ARRAY IMMUTABLY
             const fakeIdx = 1;
             //Create a coppy of the array NOT DEEPLY

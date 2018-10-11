@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionsTypes';
+import { updateObject } from '../utility'; 
 
 const initialState = {
     counter: 0
@@ -7,25 +8,19 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case actionTypes.INCREMENT:
-            //Create a clono, not a DEEP clone
-            const newState = Object.assign({}, state)
-            newState.counter = state.counter + 1;
-            return newState;
+            return updateObject(state, {counter: state.counter + 1});
         case actionTypes.DECREMENT:
-            return {
-                ...state,
-                counter: state.counter - 1
-            }
+            return updateObject(state, {counter: state.counter - 1});
         case actionTypes.ADD:
+            /* It remains here just as a sample
             return {
                 ...state,
                 counter: state.counter + action.payload
             }
+            */
+            return updateObject(state, {counter: state.counter + action.payload});
         case actionTypes.SUBTRACT:
-            return {
-                ...state,
-                counter: state.counter - action.payload
-            }
+            return updateObject(state, {counter: state.counter - action.payload});
     }
 
     return state;
